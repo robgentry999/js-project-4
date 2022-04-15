@@ -124,9 +124,12 @@ class Game {
     }
 
     const hearts = document.querySelectorAll('.tries img');
-    for(let i = 0; i <= hearts.length; i++){
-      hearts[i].src = 'images/liveHeart.png';
-    }
+    hearts.forEach(heart => {
+      heart.src = 'images/liveHeart.png';
+    });
+ //  for(let i = 0; i < hearts.length; i++){
+ //    hearts[i].src = 'images/liveHeart.png';
+   // }
     const phraseDiv = document.getElementById('phrase');
     const phraseUl = phraseDiv.firstElementChild;
     const phraseLi = phraseUl.getElementsByTagName("li");
