@@ -6,7 +6,7 @@ class Game {
     this.missed = 0;
     this.phrases = this.createPhrases();
     this.activePhrase = null;
-  };
+  }
 //random phrases
   createPhrases(){
     return [
@@ -23,17 +23,17 @@ class Game {
     const number = Math.floor(Math.random() * this.phrases.length);
     const randomPhrase = this.phrases[number];
     return randomPhrase;
-  };
+  }
 
 //hides start screen overlay when start game is clicked
   startGame(){
     let overlay = document.getElementById("overlay")
-    document.getElementById("btn__reset").addEventListener("click", () => overlay.style.display = 'none');
-
+//document.getElementById("btn__reset").addEventListener("click", () => overlay.style.display = 'none');
+    overlay.style.display = 'none';
     this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
     this.activePhrase.checkLetter();    
-  };
+  }
 
 
    removeLife(){
@@ -47,12 +47,12 @@ class Game {
          if(this.missed > 5 || this.missed === 5){
            this.gameOver(false);
          }
-         return image.src = "images/lostHeart.png"
+         return image.src = "images/lostHeart.png";
        }
      }
 
 
-  };
+  }
 
   checkForWin(){
     const letter = document.querySelectorAll(".hide");
@@ -62,7 +62,7 @@ class Game {
       return false;
     }
 
-  };
+  }
 
   gameOver(gameWon){
    document.getElementById('overlay').style.display = 'block';
@@ -80,7 +80,7 @@ class Game {
      this.missed = 0;
      this.reset();
    }
-  };
+  }
 
 //adds corresponding class if chosen letter is right or wrong, removes life, and sets game
 //over to true or false
@@ -101,7 +101,7 @@ class Game {
        }
      }
      event.disabled = true;
-  };
+  }
 
   //restarts game
   reset(){
@@ -132,7 +132,7 @@ class Game {
     const phraseLi = phraseUl.getElementsByTagName("li");
 
     for(let i = 0; i < phraseLi.length; i++){
-      phraseLi[i].classList.replace("show", "hide")
+      phraseLi[i].classList.replace("show", "hide");
       
     }       
    }   
