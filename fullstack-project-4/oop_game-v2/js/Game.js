@@ -36,23 +36,14 @@ class Game {
   }
 
 
-   removeLife(){
-     const images = document.getElementsByClassName("tries");
-
-     for(let i = 0; i < images.length; i++){
-       let image = images[i].firstElementChild;
-
-       if(image.src.includes("images/liveHeart.png")){
-         this.missed += 1;
-         if(this.missed > 5 || this.missed === 5){
-           this.gameOver(false);
-         }
-         return image.src = "images/lostHeart.png";
-       }
-     }
-
-
-  }
+  removeLife(){
+    const images = document.querySelectorAll(".tries img");
+    images[this.missed].src = "images/lostHeart.png";
+    this.missed += 1
+    if (this.missed >=5) {
+      this.gameOver(false);
+    }
+ }
 
   checkForWin(){
     const letter = document.querySelectorAll(".hide");
@@ -69,14 +60,17 @@ class Game {
 
    if(gameWon === false){
      document.getElementById('game-over-message').textContent = "Game Over";
-     document.getElementById('overlay').classList.add('lose');
+    // document.getElementById('overlay').classList.add('lose');
+    document.getElementById('overlay').setAttribute('class','lose')
      document.getElementById('overlay').classList.remove('start');
+     document.getElementById('overlay').classList.remove('win');
      this.missed = 0;
      this.reset();
    } else if(gameWon){
      document.getElementById('game-over-message').textContent = "You Won";
-     document.getElementById('overlay').classList.add('win');
+     document.getElementById('overlay').setAttribute('class','win');
      document.getElementById('overlay').classList.remove('start');
+     document.getElementById('overlay').classList.remove('lose');
      this.missed = 0;
      this.reset();
    }
@@ -85,6 +79,7 @@ class Game {
 //adds corresponding class if chosen letter is right or wrong, removes life, and sets game
 //over to true or false
   handleInteraction(event){
+    event.disabled = true;
      if(this.activePhrase.checkLetter(event.textContent) === false){
        event.classList.add("wrong");
        this.removeLife();
@@ -100,7 +95,6 @@ class Game {
          this.gameOver(false);
        }
      }
-     event.disabled = true;
   }
 
   //restarts game
